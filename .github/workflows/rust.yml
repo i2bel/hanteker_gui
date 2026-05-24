@@ -1,4 +1,4 @@
-name: Build Windows EXE
+name: Build Windows EXE Fast
 
 on:
   workflow_dispatch:
@@ -14,15 +14,8 @@ jobs:
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
 
-    - name: Install vcpkg and dependencies
-      run: |
-        vcpkg integrate install
-        vcpkg install skia:x64-windows
-
-    - name: Build Release
+    - name: Build Release Fast
       run: cargo build --release
-      env:
-        SLINT_BACKEND: skia
 
     - name: Upload EXE Artifact
       uses: actions/upload-artifact@v4
